@@ -39,6 +39,7 @@ namespace musicApp
 
             //variable declaration
             RootPixa pixabay = GetApi.GetPixabay();
+            RootDisc discogs = new RootDisc();
 
             //fetch a random image and set it as the background
             int randNbr = RandNbr();
@@ -47,11 +48,9 @@ namespace musicApp
 
             //filter search result for discogs api
             string parametre = "&q=Nirvana&format=Vinyl";
-            RootDisc discogs = GetApi.GetDiscogs(parametre).Result;
+            discogs = GetApi.GetDiscogs(parametre).Result;
 
             MessageBox.Show(discogs.results[0].cover_image);
-
-
         }
 
 

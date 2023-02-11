@@ -57,6 +57,7 @@ namespace musicApp.apiCall
     {
         public Pagination pagination { get; set; }
         public List<Result> results { get; set; }
+        public string message { get; set; }
     }
 
     public class Urls

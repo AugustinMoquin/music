@@ -10,6 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using System.Data;
+using Microsoft.SqlServer.Server;
 
 namespace musicApp.apiCall
 {
@@ -29,7 +32,33 @@ namespace musicApp.apiCall
 
         public static async Task<RootDisc> GetDiscogs(string parametre)
         {
+            // Initialization.  
+            RootDisc responseObj = new RootDisc();
+            var client = new HttpClient();
+
+            // Setting Base address.  
+            client.BaseAddress = new Uri("https://api.discogs.com/");
+
+            // Setting content type.  
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // HTTP GET  
+            HttpResponseMessage response = await client.GetAsync("database/search?key=VsuLTyjYmHdQAdebSyLD&secret=AxSajuVrIJgxbQPgckKYKNfJWOHLWoZM" + parametre).ConfigureAwait(false);
+
+            // Verification  
+            if (response.IsSuccessStatusCode)
+            {
+                // Reading Response.  
+                string result = response.Content.ReadAsStringAsync().Result;
+                responseObj = JsonConvert.DeserializeObject<RootDisc>(result);
+            }
+            return responseObj;
+        }
+
+        /*public static async Task<RootDisc> GetDiscogs(string parametre)
+        {
             //string parametre = "&q=Nirvana&"
+            //&q = Nirvana & format = Vinyl
             string url = "https://api.discogs.com/database/search?";
             string key = "key=VsuLTyjYmHdQAdebSyLD";
             string secret = "secret=AxSajuVrIJgxbQPgckKYKNfJWOHLWoZM";
@@ -42,6 +71,6 @@ namespace musicApp.apiCall
 
             return discogs;
          
-        }
+        }*/
     }
 }

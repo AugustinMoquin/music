@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RateLimiter</name>
+    </assembly>
+    <members>
+        <member name="T:RateLimiter.PersistentCountByIntervalAwaitableConstraint">
+            <summary>
+            <see cref="T:RateLimiter.CountByIntervalAwaitableConstraint"/> that is able to save own state.
+            </summary>
+        </member>
+        <member name="M:RateLimiter.PersistentCountByIntervalAwaitableConstraint.#ctor(System.Int32,System.TimeSpan,System.Action{System.DateTime},System.Collections.Generic.IEnumerable{System.DateTime},RateLimiter.ITime)">
+            <summary>
+            Create an instance of <see cref="T:RateLimiter.PersistentCountByIntervalAwaitableConstraint"/>.
+            </summary>
+            <param name="count">Maximum actions allowed per time interval.</param>
+            <param name="timeSpan">Time interval limits are applied for.</param>
+            <param name="saveStateAction">Action is used to save state.</param>
+            <param name="initialTimeStamps">Initial timestamps.</param>
+        </member>
+        <member name="M:RateLimiter.PersistentCountByIntervalAwaitableConstraint.OnEnded(System.DateTime)">
+            <summary>
+            Save state
+            </summary>
+        </member>
+        <member name="M:RateLimiter.TimeLimiter.GetPersistentTimeLimiter(System.Int32,System.TimeSpan,System.Action{System.DateTime})">
+            <summary>
+            Create <see cref="T:RateLimiter.TimeLimiter"/> that will save state using action passed through <paramref name="saveStateAction"/> parameter.
+            </summary>
+            <param name="maxCount">Maximum actions allowed per time interval.</param>
+            <param name="timeSpan">Time interval limits are applied for.</param>
+            <param name="saveStateAction">Action is used to save state.</param>
+            <returns><see cref="T:RateLimiter.TimeLimiter"/> instance with <see cref="T:RateLimiter.PersistentCountByIntervalAwaitableConstraint"/>.</returns>
+        </member>
+        <member name="M:RateLimiter.TimeLimiter.GetPersistentTimeLimiter(System.Int32,System.TimeSpan,System.Action{System.DateTime},System.Collections.Generic.IEnumerable{System.DateTime})">
+            <summary>
+            Create <see cref="T:RateLimiter.TimeLimiter"/> with initial timestamps that will save state using action passed through <paramref name="saveStateAction"/> parameter.
+            </summary>
+            <param name="maxCount">Maximum actions allowed per time interval.</param>
+            <param name="timeSpan">Time interval limits are applied for.</param>
+            <param name="saveStateAction">Action is used to save state.</param>
+            <param name="initialTimeStamps">Initial timestamps.</param>
+            <returns><see cref="T:RateLimiter.TimeLimiter"/> instance with <see cref="T:RateLimiter.PersistentCountByIntervalAwaitableConstraint"/>.</returns>
+        </member>
+    </members>
+</doc>

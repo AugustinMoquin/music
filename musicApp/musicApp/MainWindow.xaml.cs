@@ -1,4 +1,5 @@
-﻿using musicApp.apiCall;
+﻿using DiscogsClient.Data.Result;
+using musicApp.apiCall;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace musicApp
     ///     Autoriser l'URL 	https://www.discogs.com/fr/oauth/authorize
     ///     URL du jeton d'accès 	https://api.discogs.com/oauth/access_token
     ///     query exemple : https://api.discogs.com/database/search?q=Nirvana&key=VsuLTyjYmHdQAdebSyLD&secret=AxSajuVrIJgxbQPgckKYKNfJWOHLWoZM
+    ///     token : hYUJPfyinwOXxHxIRCaNUmdGhKAHxBmMHtFUuxiw
     /// </api key>
     public partial class MainWindow : Window
     {
@@ -39,7 +41,6 @@ namespace musicApp
 
             //variable declaration
             RootPixa pixabay = GetApi.GetPixabay();
-            RootDisc discogs = new RootDisc();
 
             //fetch a random image and set it as the background
             int randNbr = RandNbr();
@@ -47,17 +48,29 @@ namespace musicApp
             image.Source = new BitmapImage(new Uri(URLimage));
 
             //filter search result for discogs api
-            string parametre = "&q=Nirvana&format=Vinyl";
-            discogs = GetApi.GetDiscogs(parametre).Result;
+            Parametre parametre = new Parametre()
+            {
+                artist = "Nirvana",
+                format = "Vinyl"
+            };
 
-            MessageBox.Show(discogs.results[0].cover_image);
+            //call for a the result of the discogs search
+            _ = ShowDiscogs(parametre);
+            //MessageBox.Show(discogs.results[0].title);
+
         }
 
 
         //diplay a certain amount of album in the xaml
-        private void get_Disque()
+        public async Task ShowDiscogs(Parametre parametre)
         {
-            //this.lbxAsteroid.ItemsSource = Name_List;
+            var discogs = await GetApi.GetDiscogs(parametre).ConfigureAwait(false);
+            List<Ind_Disque> Disc_List = new List<Ind_Disque>();
+            //discogs.results[0].genre
+            Ind_Disque ind_Disque = new Ind_Disque();
+            ind_Disque.title = discogs.results[0].title;
+            Disc_List.Add(ind_Disque);
+            lbxDisque.ItemsSource = Disc_List;
         }
 
 

@@ -13,6 +13,12 @@ using System.Windows.Shapes;
 using Newtonsoft.Json;
 using System.Data;
 using Microsoft.SqlServer.Server;
+using System.Runtime.Remoting.Messaging;
+using RestSharpHelper.OAuth1;
+using DiscogsClient;
+using DiscogsClient.Data.Query;
+using DiscogsClient.Internal;
+using DiscogsClient.Data.Result;
 
 namespace musicApp.apiCall
 {
@@ -25,52 +31,34 @@ namespace musicApp.apiCall
             StreamReader reader = new StreamReader(response.GetResponseStream());
 
             string pixabay_json = reader.ReadToEnd();
-            RootPixa pixabay = Newtonsoft.Json.JsonConvert.DeserializeObject<RootPixa>(pixabay_json);
+            RootPixa pixabay = JsonConvert.DeserializeObject<RootPixa>(pixabay_json);
 
             return pixabay;
         }
 
-        public static async Task<RootDisc> GetDiscogs(string parametre)
+        public static async Task<DiscogsSearchResults> GetDiscogs(Parametre parametre)
         {
-            // Initialization.  
-            RootDisc responseObj = new RootDisc();
-            var client = new HttpClient();
-
-            // Setting Base address.  
-            client.BaseAddress = new Uri("https://api.discogs.com/");
-
-            // Setting content type.  
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            // HTTP GET  
-            HttpResponseMessage response = await client.GetAsync("database/search?key=VsuLTyjYmHdQAdebSyLD&secret=AxSajuVrIJgxbQPgckKYKNfJWOHLWoZM" + parametre).ConfigureAwait(false);
-
-            // Verification  
-            if (response.IsSuccessStatusCode)
+            string token = "hYUJPfyinwOXxHxIRCaNUmdGhKAHxBmMHtFUuxiw";
+            var tokenInformation = new TokenAuthenticationInformation(token);
             {
-                // Reading Response.  
-                string result = response.Content.ReadAsStringAsync().Result;
-                responseObj = JsonConvert.DeserializeObject<RootDisc>(result);
+                //Create discogs client using the authentication
+                var discogsClient = new DiscogsClient.DiscogsClient(tokenInformation);
+
+                var discogsSearch = new DiscogsSearch()
+                {
+                    artist = parametre.artist,
+                    format = parametre.format,
+                };
+                var res = await SearchDis(discogsClient, discogsSearch).ConfigureAwait(false);
+                //return res.Result;
+                return res;
             }
-            return responseObj;
         }
 
-        /*public static async Task<RootDisc> GetDiscogs(string parametre)
+        private async static Task<DiscogsSearchResults> SearchDis(DiscogsClient.DiscogsClient dc, DiscogsSearch ds)
         {
-            //string parametre = "&q=Nirvana&"
-            //&q = Nirvana & format = Vinyl
-            string url = "https://api.discogs.com/database/search?";
-            string key = "key=VsuLTyjYmHdQAdebSyLD";
-            string secret = "secret=AxSajuVrIJgxbQPgckKYKNfJWOHLWoZM";
-            WebRequest resquest = HttpWebRequest.Create(url + "&" + key + "&" + secret + "&" + parametre);
-            WebResponse response = resquest.GetResponseAsync().Result;
-            StreamReader reader = new StreamReader(response.GetResponseStream());
-
-            string discogs_json = reader.ReadToEnd();
-            RootDisc discogs = Newtonsoft.Json.JsonConvert.DeserializeObject<RootDisc>(discogs_json);
-
-            return discogs;
-         
-        }*/
+            var res = await dc.SearchAsync(ds).ConfigureAwait(false);
+            return res;
+        }
     }
 }

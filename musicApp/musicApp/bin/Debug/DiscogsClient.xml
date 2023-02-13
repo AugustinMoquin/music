@@ -1,0 +1,474 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DiscogsClient</name>
+    </assembly>
+    <members>
+        <member name="P:DiscogsClient.Data.Query.DiscogsPaginable.page">
+            <summary>
+             number(optional) Example: 3
+             The page you want to request
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsPaginable.per_page">
+            <summary>
+             number(optional) Example: 25
+             The number of item per page
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.query">
+            <summary>
+             Your search query. Example: nirvana
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.type">
+            <summary>
+             Example: release
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.title">
+            <summary>
+             Search by combined “Artist Name - Release Title” title field.
+             Example: nirvana - nevermind
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.release_title">
+            <summary>
+             Search release titles. Example: nevermind
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.credit">
+            <summary>
+             Search release credits.Example: kurt
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.artist">
+            <summary>
+             Search artist names. Example: nirvana
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.anv">
+            <summary>
+             Search artist ANV. Example: nirvana
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.label">
+            <summary>
+             Search label names. Example: dgc
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.genre">
+            <summary>
+             Search genres. Example: rock
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.style">
+            <summary>
+            Search style. Example: grunge
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.country">
+            <summary>
+             Search country. Example: canada
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.year">
+            <summary>
+             Search release year.  Example: 1991
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.format">
+            <summary>
+             Search formats.  Example: album
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.catno">
+            <summary>
+             Search catalog number.  Example: DGCD-24425
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.barcode">
+            <summary>
+             Search barcodes. Example: 7 2064-24425-2 4
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.track">
+            <summary>
+             Search track titles. Example: smells like teen spirit
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.submitter">
+            <summary>
+             Search submitter username. Example: milKt
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSearch.contributor">
+            <summary>
+             Search contributor usernames. Example: jerome99
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSortInformation.sort">
+            <summary>
+             Sort items by this field
+            </summary>
+        </member>
+        <member name="P:DiscogsClient.Data.Query.DiscogsSortInformation.sort_order">
+            <summary>
+             Sort items in a particular order (one of asc, desc)
+            </summary>
+        </member>
+        <member name="T:DiscogsClient.DiscogsAuthentifierClient">
+            <summary>
+            Discogs implementation of <see cref="T:RestSharpHelper.OAuth1.IOAuthAuthentifierClient"/> 
+            </summary>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetReleaseAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a release
+            See https://www.discogs.com/developers/#page:database,header:database-release
+            </summary>
+            <param name="releaseId">The Release ID</param>
+            <param name="token">Cancellation Token</param>
+            <returns>The corresponding release</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetReleaseAsync(System.Int32)">
+            <summary>
+            Get a release
+            See https://www.discogs.com/developers/#page:database,header:database-release
+            </summary>
+            <param name="releaseId">The Release ID</param>
+            <returns>The corresponding release</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetMasterAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a master release
+            See https://www.discogs.com/developers/#page:database,header:database-master-release
+            </summary>
+            <param name="masterId">The Master ID</param>
+            <param name="token">Cancellation Token</param>
+            <returns>The corresponding master</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetMasterAsync(System.Int32)">
+            <summary>
+            Get a master release
+            see https://www.discogs.com/developers/#page:database,header:database-master-release
+            </summary>
+            <param name="masterId">The Master ID</param>
+            <returns>The corresponding master</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetMasterReleaseVersions(System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Retrieves an observable of all Releases that are versions of this master.
+            See https://www.discogs.com/developers/#page:database,header:database-master-release-versions
+            </summary>
+            <param name="masterId">The Master ID</param>
+            <param name="max">Number maximum of elements. If null return all elements.</param>
+            <returns>The corresponding releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetMasterReleaseVersionsAsEnumerable(System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Retrieves an enumerable of all Releases that are versions of this master.
+            See https://www.discogs.com/developers/#page:database,header:database-master-release-versions
+            </summary>
+            <param name="masterId">The Master ID</param>
+            <param name="max">Number maximum of elements. If null return all elements.</param>
+            <returns>The corresponding releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetMasterReleaseVersionsAsync(System.Int32,DiscogsClient.Data.Query.DiscogsPaginable,System.Threading.CancellationToken)">
+            <summary>
+            Retrieves an enumerable of all Releases that are versions of this master.
+            See https://www.discogs.com/developers/#page:database,header:database-master-release-versions 
+            </summary>
+            <param name="masterId">The Master ID</param>
+            <param name="paginable">Paginable information</param>
+            <param name="token">CancellationToken</param>
+            <returns>The corresponding releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetMasterReleaseVersionsAsync(System.Int32,DiscogsClient.Data.Query.DiscogsPaginable)">
+            <summary>
+            Retrieves an enumerable of all Releases that are versions of this master.
+            See https://www.discogs.com/developers/#page:database,header:database-master-release-versions
+            </summary>
+            <param name="masterId">The Master ID</param>
+            <param name="paginable">Paginable information</param>
+            <returns>The corresponding releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetArtistAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get an artist
+            See https://www.discogs.com/developers/#page:database,header:database-artist
+            </summary>
+            <param name="artistId">The Release ID</param>
+            <param name="token">Cancellation Token</param>
+            <returns>The corresponding artist</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetArtistAsync(System.Int32)">
+            <summary>
+            Get an artist
+            See https://www.discogs.com/developers/#page:database,header:database-artist
+            </summary>
+            <param name="artistId">The Release ID</param>
+            <returns>The corresponding artist</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetArtistRelease(System.Int32,DiscogsClient.Data.Query.DiscogsSortInformation,System.Nullable{System.Int32})">
+            <summary>
+            Returns a observable of Releases and Masters associated with the Artist.
+            See https://www.discogs.com/developers/#page:database,header:database-artist-releases
+            </summary>
+            <param name="artistId">The artist ID</param>
+            <param name="sort">Sorting information.</param>
+            <param name="max">Number maximum of elements. If null return all elements.</param>
+            <returns>The corresponding releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetArtistReleaseAsEnumerable(System.Int32,DiscogsClient.Data.Query.DiscogsSortInformation,System.Nullable{System.Int32})">
+            <summary>
+            Returns a enumerable of Releases and Masters associated with the Artist.
+            See https://www.discogs.com/developers/#page:database,header:database-artist-releases
+            </summary>
+            <param name="artistId">The artist ID</param>
+            <param name="sort">Sorting information</param>
+            <param name="max">Number maximum of elements. If null return all elements.</param>
+            <returns>The corresponding releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetArtistReleaseAsync(System.Int32,DiscogsClient.Data.Query.DiscogsSortInformation,DiscogsClient.Data.Query.DiscogsPaginable,System.Threading.CancellationToken)">
+            <summary>
+            Returns a enumerable of Releases and Masters associated with the Artist.
+            See https://www.discogs.com/developers/#page:database,header:database-artist-releases
+            </summary>
+            <param name="artistId">The artist ID</param>
+            <param name="sort">Sorting information</param>
+            <param name="paginable">Paginable information</param>
+            <param name="token">CancellationToken</param>
+            <returns>The corresponding releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetArtistReleaseAsync(System.Int32,DiscogsClient.Data.Query.DiscogsSortInformation,DiscogsClient.Data.Query.DiscogsPaginable)">
+            <summary>
+            Returns a enumerable of Releases and Masters associated with the Artist.
+            See https://www.discogs.com/developers/#page:database,header:database-artist-releases
+            </summary>
+            <param name="artistId">The artist ID</param>
+            <param name="sort">Sorting information</param>
+            <param name="paginable">Paginable information</param>
+            <returns>The corresponding releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetLabelAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a label
+            See https://www.discogs.com/developers/#page:database,header:database-label
+            </summary>
+            <param name="labelId">The Label ID</param>
+            <param name="token">Cancellation Token</param>
+            <returns>The corresponding label</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetLabelAsync(System.Int32)">
+            <summary>
+            Get a label
+            See https://www.discogs.com/developers/#page:database,header:database-label
+            </summary>
+            <param name="labelId">The Label ID</param>
+            <returns>The corresponding label</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetAllLabelReleases(System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Returns an observable of Releases associated with the label.
+            See https://www.discogs.com/developers/#page:database,header:database-all-label-releases
+            </summary>
+            <param name="labelId">The label ID</param>
+            <param name="max">Number maximum of elements. If null return all elements.</param>
+            <returns>The corresponding releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetAllLabelReleasesAsEnumerable(System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Returns an enumerable of Releases associated with the label.
+            See https://www.discogs.com/developers/#page:database,header:database-all-label-releases
+            </summary>
+            <param name="labelId">The label ID</param>
+            <param name="max">Number maximum of elements. If null return all elements.</param>
+            <returns>The corresponding label releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetAllLabelReleasesAsync(System.Int32,DiscogsClient.Data.Query.DiscogsPaginable,System.Threading.CancellationToken)">
+            <summary>
+            Returns an enumerable of Releases associated with the label.
+            See https://www.discogs.com/developers/#page:database,header:database-all-label-releases
+            </summary>
+            <param name="labelId">The label ID</param>
+            <param name="paginable">Paginable information</param>
+            <param name="token">CancellationToken</param>
+            <returns>The corresponding label releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.GetAllLabelReleasesAsync(System.Int32,DiscogsClient.Data.Query.DiscogsPaginable)">
+            <summary>
+            Returns an enumerable of Releases associated with the label.
+            See https://www.discogs.com/developers/#page:database,header:database-all-label-releases 
+            </summary>
+            <param name="labelId">The label ID</param>
+            <param name="paginable">Paginable information</param>
+            <returns>The corresponding label releases</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.Search(DiscogsClient.Data.Query.DiscogsSearch,System.Nullable{System.Int32})">
+            <summary>
+            Issue a search query to Discogs database.
+            See https://www.discogs.com/developers/#page:database,header:database-search.
+            </summary>
+            <param name="search">The Corresponding query</param>
+            <param name="max">Number maximum of elements. If null return all elements.</param>
+            <returns>The corresponding search result</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.SearchAsEnumerable(DiscogsClient.Data.Query.DiscogsSearch,System.Nullable{System.Int32})">
+            <summary>
+            Issue a search query to Discogs database.
+            See https://www.discogs.com/developers/#page:database,header:database-search.
+            </summary>
+            <param name="search">The Corresponding query</param>
+            <param name="max">Number maximum of elements. If null return all elements.</param>
+            <returns>The corresponding search result</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.SearchAsync(DiscogsClient.Data.Query.DiscogsSearch,DiscogsClient.Data.Query.DiscogsPaginable,System.Threading.CancellationToken)">
+            <summary>
+            Issue a search query to Discogs database.
+            See https://www.discogs.com/developers/#page:database,header:database-search. 
+            </summary>
+            <param name="search">The Corresponding query</param>
+            <param name="paginable">paginable information</param>
+            <param name="token">CancellationToken</param>
+            <returns>The corresponding search result</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.SearchAsync(DiscogsClient.Data.Query.DiscogsSearch,DiscogsClient.Data.Query.DiscogsPaginable)">
+            <summary>
+            Issue a search query to Discogs database.
+            See https://www.discogs.com/developers/#page:database,header:database-search. 
+            </summary>
+            <param name="search">The Corresponding query</param>
+            <param name="paginable">paginable information</param>
+            <returns>The corresponding search result</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.DownloadImageAsync(DiscogsClient.Data.Result.DiscogsImage,System.IO.Stream,System.Threading.CancellationToken,DiscogsClient.Data.Query.DiscogsImageFormatType)">
+            <summary>
+            Download the stream corresponding to a given image
+            </summary>
+            <param name="image">The image to download</param>
+            <param name="copyStream">Stream where image stream will be copied</param>
+            <param name="cancellationToken">Cancellation Token</param>
+            <param name="type">Type of image to download: thumbnail or normal</param>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.DownloadImageAsync(DiscogsClient.Data.Result.DiscogsImage,System.IO.Stream,DiscogsClient.Data.Query.DiscogsImageFormatType)">
+            <summary>
+            Download the stream corresponding to a given image
+            </summary>
+            <param name="image">The image to download</param>
+            <param name="copyStream">Stream where image stream will be copied</param>
+            <param name="type">Type of image to download: thumbnail or normal</param>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.SaveImageAsync(DiscogsClient.Data.Result.DiscogsImage,System.String,System.String,System.Threading.CancellationToken,DiscogsClient.Data.Query.DiscogsImageFormatType)">
+            <summary>
+            Save a given image to disk.
+            </summary>
+            <param name="image">The image to download</param>
+            <param name="path">Type of image to download: thumbnail or normal</param>
+            <param name="fileName">Type of image to download: thumbnail or normal</param>
+            <param name="type">Type of image to download: thumbnail or normal</param>
+            <param name="cancellationToken">Cancellation Token</param>
+            <returns>the file path</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsDataBaseClient.SaveImageAsync(DiscogsClient.Data.Result.DiscogsImage,System.String,System.String,DiscogsClient.Data.Query.DiscogsImageFormatType)">
+            <summary>
+            Download the stream corresponding to a given image
+            </summary>
+            <param name="image">The image to download</param>
+            <param name="path">Type of image to download: thumbnail or normal</param>
+            <param name="fileName">Type of image to download: thumbnail or normal</param>
+            <param name="type">Type of image to download: thumbnail or normal</param>
+            <returns>the file path</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsReleaseRatingClient.GetUserReleaseRatingAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Retrieves the release’s rating for a given user.
+            See https://www.discogs.com/developers/#page:database,header:database-release-rating-by-user
+            </summary>
+            <param name="userName">The username of the rating you are trying to request.</param>
+            <param name="releaseId">The Release ID</param>
+            <param name="cancellationToken">Cancellation Token</param>
+            <returns>The corresponding release’s rating</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsReleaseRatingClient.GetUserReleaseRatingAsync(System.String,System.Int32)">
+            <summary>
+            Retrieves the release’s rating for a given user.
+            See https://www.discogs.com/developers/#page:database,header:database-release-rating-by-user
+            </summary>
+            <param name="userName">The username of the rating you are trying to request.</param>
+            <param name="releaseId">The Release ID</param>
+            <returns>The corresponding release’s rating</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsReleaseRatingClient.SetUserReleaseRatingAsync(System.Int32,System.Int32)">
+            <summary>
+            Updates the release’s rating for a given user. 
+            See https://www.discogs.com/developers/#page:database,header:database-release-rating-by-user-put
+            </summary>
+            <param name="releaseId">The Release ID</param>
+            <param name="rating">The rating</param>
+            <returns>The corresponding updated release’s rating</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsReleaseRatingClient.SetUserReleaseRatingAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Updates the release’s rating for a given user. 
+            See https://www.discogs.com/developers/#page:database,header:database-release-rating-by-user-put
+            </summary>
+            <param name="releaseId">The Release ID</param>
+            <param name="rating">The rating</param>
+            <returns>The corresponding updated release’s rating</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsReleaseRatingClient.DeleteUserReleaseRatingAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Deletes the release’s rating for the current user.
+            See https://www.discogs.com/developers/#page:database,header:database-release-rating-by-user-delete
+            </summary>
+            <param name="releaseId">The Release ID</param>
+            <param name="token">Cancellation Token</param>
+            <returns>True if the operation is sucessfull</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsReleaseRatingClient.DeleteUserReleaseRatingAsync(System.Int32)">
+            <summary>
+            Deletes the release’s rating for the current user.
+            See https://www.discogs.com/developers/#page:database,header:database-release-rating-by-user-delete
+            </summary>
+            <param name="releaseId">The Release ID</param>
+            <returns>True if the operation is sucessfull</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsReleaseRatingClient.GetCommunityReleaseRatingAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Retrieves the community release rating average and count.
+            See https://www.discogs.com/developers/#page:database,header:database-community-release-rating
+            </summary>
+            <param name="releaseId">The Release ID</param>
+            <param name="cancellationToken">Cancellation Token</param>
+            <returns>The community release rating</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsReleaseRatingClient.GetCommunityReleaseRatingAsync(System.Int32)">
+            <summary>
+            Retrieves the community release rating average and count.
+            See https://www.discogs.com/developers/#page:database,header:database-community-release-rating
+            </summary>
+            <param name="releaseId">The Release ID</param>
+            <returns>The community release rating</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsUserIdentityClient.GetUserIdentityAsync(System.Threading.CancellationToken)">
+            <summary>
+            Retrieve basic information about the authenticated user.
+            You can use this resource to find out who you’re authenticated as, and 
+            it also doubles as a good sanity check to ensure that you’re using OAuth correctly.
+            See https://www.discogs.com/developers/#page:user-identity,header:user-identity-identity
+            </summary>
+            <param name="cancellationToken">Cancellation Token</param>
+            <returns>The current discogs user identity</returns>
+        </member>
+        <member name="M:DiscogsClient.IDiscogsUserIdentityClient.GetUserIdentityAsync">
+            <summary>
+            Retrieve basic information about the authenticated user.
+            You can use this resource to find out who you’re authenticated as, and 
+            it also doubles as a good sanity check to ensure that you’re using OAuth correctly.
+            See https://www.discogs.com/developers/#page:user-identity,header:user-identity-identity
+            </summary>
+            <returns>The current discogs user identity</returns>
+        </member>
+    </members>
+</doc>

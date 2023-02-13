@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace musicApp.apiCall
 {
+    public class Parametre
+    {
+        public string artist { get; set; }
+        public string format { get; set; }
+    }
+
     public class Community
     {
         public int want { get; set; }
@@ -64,6 +70,16 @@ namespace musicApp.apiCall
     {
         public string last { get; set; }
         public string next { get; set; }
+    }
+
+    public class Ind_Disque
+    {
+        public int id { get; set; }
+        public string country { get; set; }
+        public List<string> format { get; set; }
+        public List<string> genre { get; set; }
+        public string title { get; set; }
+
     }
 
 }

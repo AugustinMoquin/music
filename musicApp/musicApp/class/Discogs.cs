@@ -74,10 +74,10 @@ namespace musicApp.apiCall
 
     public class Ind_Disque
     {
-        public int id { get; set; }
+        /*public int id { get; set; }
         public string country { get; set; }
         public List<string> format { get; set; }
-        public List<string> genre { get; set; }
+        public List<string> genre { get; set; }*/
         public string title { get; set; }
 
     }

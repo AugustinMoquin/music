@@ -26,7 +26,7 @@ namespace musicApp.apiCall
     {
         public static RootPixa GetPixabay()
         {
-            WebRequest resquest = HttpWebRequest.Create("https://pixabay.com/api/?key=33423123-b42832bf6ee20d22ac1dc20f2&category=music&image_type=photo&pretty=true&min_width=900&min_height=600&per_page=100");
+            WebRequest resquest = HttpWebRequest.Create("https://pixabay.com/api/?key=33423123-b42832bf6ee20d22ac1dc20f2&category=music&image_type=photo&pretty=true&min_width=900&min_height=600&per_page=100&colors=black");
             WebResponse response = resquest.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
 

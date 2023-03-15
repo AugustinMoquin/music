@@ -30,6 +30,7 @@ namespace musicApp
     ///     URL du jeton d'accès 	https://api.discogs.com/oauth/access_token
     ///     query exemple : https://api.discogs.com/database/search?q=Nirvana&key=VsuLTyjYmHdQAdebSyLD&secret=AxSajuVrIJgxbQPgckKYKNfJWOHLWoZM
     ///     token : hYUJPfyinwOXxHxIRCaNUmdGhKAHxBmMHtFUuxiw
+    ///     clés gratuites
     /// </api key>
     public partial class MainWindow : Window
     {
@@ -65,11 +66,12 @@ namespace musicApp
         public async Task ShowDiscogs(Parametre parametre)
         {
             var discogs = await GetApi.GetDiscogs(parametre).ConfigureAwait(false);
+
             List<Ind_Disque> Disc_List = new List<Ind_Disque>();
-            //discogs.results[0].genre
             Ind_Disque ind_Disque = new Ind_Disque();
             ind_Disque.title = discogs.results[0].title;
             Disc_List.Add(ind_Disque);
+            //MessageBox.Show(Disc_List[0].title);
             lbxDisque.ItemsSource = Disc_List;
         }
 
